@@ -1,21 +1,37 @@
-<style>
-  
-</style>
-
 <div class="container my-5">
   <h1><strong>Youtube Downloader</strong></h1>
-  <form method="GET" action='/download' class="my-5">
+  <form (ngSubmit)="download()" class="my-5" *ngIf="!video; else showVideo">
     <div class="form-group">
       <label for="videoURL"
-        >Video Link from Youtube</label
-      >
+        >Video Link from Youtube
+      </label>
       <input
         type="text"
         class="form-control"
         placeholder="Enter Video URL"
-                    name="url"
+        name="url"
+        [(ngModel)]="input.url"
       />
     </div>
     <button type="submit" class="btn btn-primary">Download</button>
   </form>
+  <ng-template #showVideo>      
+    <div class="container">
+			<iframe class="d-flex" width="640" height="480" [src]="url | safe">
+			</iframe>
+		</div>
+		<div class="container">
+			<div class="btn-group">
+				<button
+					type="button"
+					class="btn btn-success dropdown-toggle"
+					data-toggle="dropdown"
+					aria-haspopup="true"
+					aria-expanded="false"
+				>
+					Download
+				</button>
+      </div>
+    </div>
+  </ng-template>
 </div>
