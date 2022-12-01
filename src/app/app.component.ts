@@ -37,6 +37,6 @@ export class AppComponent {
       this.video = false;
       this.url = '';
       this.info = [{}];
-      this.input = "";
+      this.input.url = "";
     }
 }
