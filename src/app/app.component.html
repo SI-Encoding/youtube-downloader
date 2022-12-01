@@ -24,7 +24,7 @@
 			<div class="btn-group">
 				<button
 					type="button"
-					class="btn btn-success dropdown-toggle"
+					class="btn btn-success dropdown-toggle mr-1"
 					data-toggle="dropdown"
 					aria-haspopup="true"
 					aria-expanded="false"
@@ -32,11 +32,12 @@
 				>
 					Download
 				</button>
+        <button class="btn btn-secondary" (click)="reset()">Search for more videos</button>
         <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item"  *ngFor="let format of info" [href]="format.url" target="_blank">
               {{format.mimeType.split(";")[0]}}
               {{format.hasVideo ? format.height + "p" : ""}}
-              <i class="fa fa-volume-mute text-danger" *ngIf="!format.hasAudio"></i>
+              <i class="fas fa-volume-mute text-danger" *ngIf="!format.hasAudio"></i>
             </a>
 				</div>
       </div>

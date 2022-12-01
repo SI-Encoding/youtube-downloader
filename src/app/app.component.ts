@@ -33,4 +33,10 @@ export class AppComponent {
         this.info = data.info;
       });
     }
+    reset(): void {
+      this.video = false;
+      this.url = '';
+      this.info = [{}];
+      this.input = "";
+    }
 }
