@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 interface vidDetails {
   url: string;
-  info: Array<Object>;
+  info: Array<any>;
 }
 
 @Component({
@@ -19,11 +19,11 @@ export class AppComponent {
       url: "",
   };
 
-  video = false;
+  video: boolean = false;
 
-  url = "";
+  url: string = "";
 
-  info = [{}];
+  info: Array<any> = [{}];
 
   constructor(private http: HttpClient) {}
     download(): void {

@@ -28,9 +28,17 @@
 					data-toggle="dropdown"
 					aria-haspopup="true"
 					aria-expanded="false"
+          id="dropdownMenuButton"
 				>
 					Download
 				</button>
+        <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"  *ngFor="let format of info" [href]="format.url" target="_blank">
+              {{format.mimeType.split(";")[0]}}
+              {{format.hasVideo ? format.height + "p" : ""}}
+              <i class="fa fa-volume-mute text-danger" *ngIf="!format.hasAudio"></i>
+            </a>
+				</div>
       </div>
     </div>
   </ng-template>
