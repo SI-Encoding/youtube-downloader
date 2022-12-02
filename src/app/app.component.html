@@ -13,8 +13,27 @@
         [(ngModel)]="input.url"
       />
     </div>
+    <div class="row form-group">
+    <div class="spinner-grow text-primary" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-secondary" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-success" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-danger" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-warning" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-info" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-light" role="status" *ngIf="loading">
+    </div>
+    <div class="spinner-grow text-dark" role="status" *ngIf="loading">
+    </div>
+    </div>
     <button type="submit" class="btn btn-primary">Download</button>
   </form>
+  
   <ng-template #showVideo>      
     <div class="container">
 			<iframe class="d-flex" width="640" height="480" [src]="url | safe">
