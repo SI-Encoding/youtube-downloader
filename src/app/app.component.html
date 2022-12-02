@@ -1,6 +1,6 @@
 <div class="container my-5">
   <h1><strong>YouTube Video Downloader</strong></h1>
-  <form (ngSubmit)="download()" class="my-5" *ngIf="!video; else showVideo">
+  <form ngNativeValidate (ngSubmit)="download()" class="my-5" *ngIf="!video; else showVideo">
     <div class="form-group">
       <label for="videoURL"
         >Video Link from YouTube
@@ -11,27 +11,29 @@
         placeholder="Enter Video URL"
         name="url"
         [(ngModel)]="input.url"
+        required
+        pattern="https:\/\/www\.youtube\.com\/watch\?v=.+"
       />
     </div>
     <div class="row form-group">
-    <div class="spinner-grow text-primary" role="status" *ngIf="loading">
+      <div class="spinner-grow text-primary" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-secondary" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-success" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-danger" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-warning" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-info" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-light" role="status" *ngIf="loading">
+      </div>
+      <div class="spinner-grow text-dark" role="status" *ngIf="loading">
+      </div>
     </div>
-    <div class="spinner-grow text-secondary" role="status" *ngIf="loading">
-    </div>
-    <div class="spinner-grow text-success" role="status" *ngIf="loading">
-    </div>
-    <div class="spinner-grow text-danger" role="status" *ngIf="loading">
-    </div>
-    <div class="spinner-grow text-warning" role="status" *ngIf="loading">
-    </div>
-    <div class="spinner-grow text-info" role="status" *ngIf="loading">
-    </div>
-    <div class="spinner-grow text-light" role="status" *ngIf="loading">
-    </div>
-    <div class="spinner-grow text-dark" role="status" *ngIf="loading">
-    </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Download</button>
+    <button class="btn btn-primary">Download</button>
   </form>
   
   <ng-template #showVideo>      

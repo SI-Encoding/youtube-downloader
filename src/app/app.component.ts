@@ -29,7 +29,6 @@ export class AppComponent {
 
   constructor(private http: HttpClient) {}
     
-    
     download(): void {
         this.loading = true;
         this.http.get<vidDetails>('http://localhost:5000/download', {params: this.input}).subscribe((data) => {
