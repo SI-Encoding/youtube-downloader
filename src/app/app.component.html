@@ -1,71 +1,204 @@
-<div class="container my-5">
-  <h1><strong>YouTube Video Downloader</strong></h1>
-  <form ngNativeValidate (ngSubmit)="download()" class="my-5" *ngIf="!video; else showVideo">
-    <div class="form-group">
-      <label for="videoURL"
-        >Video Link from YouTube
-      </label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter Video URL"
-        name="url"
-        [(ngModel)]="input.url"
-        required
-        pattern="https:\/\/www\.youtube\.com\/watch\?v=.+"
-
-      />
+<style>
+  input#id_url {
+    height: 50px;
+    border: none!important;
+    outline: none!important;
+    box-shadow: none!important;
+  }
+  .btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+  }
+  .fa {
+    font-size: 17px;
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+  .video-title {
+    border: 1px solid #1600a9;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: Montserrat,sans-serif;
+    background-color: transparent;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .m-0 {
+    margin: 0!important;
+  }
+  #convert-result .tabs-header {
+    margin: 0;
+    padding: 0;
+  }
+  .tabs-header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #convert-result .table-dark td .btn {
+    position: relative;
+    background: #fff;
+    border-radius: 5px;
+    color: #ff206e;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 7px 0;
+    line-height: 17px;
+    font-family: Montserrat,sans-serif;
+    text-align: center;
+    width: 127px;
+  }
+  .show-more-button {
+    text-align: center;
+    padding: 8px 0;
+    cursor: pointer;
+    border: 1px solid #1600a9;
+    border-top: 0;
+  }
+  iframe {
+    width:640px; 
+    height:480px;
+  }
+  @media (max-width: 768px) {
+    iframe {
+      width: 518px;
+    }
+  }
+  @media (max-width: 550px) {
+    iframe {
+      width: 438px;
+    }
+  }
+  @media (max-width: 478px) {
+    iframe {
+      width: 349px;
+    }
+  }
+</style>
+<section id="main" class="jumbotron mb-0 pb-3 bg-primary">
+  <div class="search-block-default-height">
+    <div class="container text-white h-100 container-search">
+      <div class="align-items-center text-center pl-lg-5">
+        <h1 class="mb-3 mt-3 main_title">YouTube Video Downloader</h1>
+         <div id="m-form" class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-6">
+            <form id="main-form" ngNativeValidate (ngSubmit)="download()" class="card card-sm">
+              <div class="card-body row no-gutters align-items-center search_form">
+                <div class="col">
+                  <input type="hidden" name="_token" value="3veLYoI0tMG15qIfylRWPfcaX2AzVXQHUAaPilNB"> 
+                    <div id="div_id_url" class="form-group">
+                      <input 
+                        type="text" 
+                        name="url" 
+                        placeholder="Paste your video link here" 
+                        autofocus="autofocus" 
+                        id="id_url" 
+                        class="textinput textInput form-control"
+                        [(ngModel)]="input.url"
+                        required
+                        pattern="https:\/\/www\.youtube\.com\/watch\?v=.+"
+                      >
+                    </div>
+                </div> 
+                <div class="col-auto">
+                  <button type="submit" id="search" class="btn btn-lg btn-danger">
+                    <span class="d-none d-md-inline mr-2">Download</span> 
+                      <i class="fa fa-arrow-right"></i>
+                  </button>
+                </div> 
+                <!---->
+                </div>
+            </form> 
+            <img loading="lazy" src="https://ssyoutube.com/img/loader.svg" id="img" width="60" height="60" style="display: none;">
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div><!----> <!----></div> <div><!----> <!----></div> 
+    <div class="container text-white h-100 find-block mt-5 find-section">
+      <div class="find-block col-lg-8"></div>
     </div>
-    <div class="row form-group">
-      <div class="spinner-grow text-primary" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-secondary" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-success" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-danger" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-warning" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-info" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-light" role="status" *ngIf="loading">
-      </div>
-      <div class="spinner-grow text-dark" role="status" *ngIf="loading">
+  </div>
+</section>
+<section id="body">
+  <div class="d-flex justify-content-center mt-5 form-group" *ngIf="loading">
+    <div class="spinner-grow text-primary" role="status">
+    </div>
+    <div class="spinner-grow text-secondary" role="status">
+    </div>
+    <div class="spinner-grow text-success" role="status">
+    </div>
+    <div class="spinner-grow text-danger" role="status">
+    </div>
+    <div class="spinner-grow text-warning" role="status">
+    </div>
+  </div>
+  <div class="alert alert-danger d-flex justify-content-center" role="alert" *ngIf="error">
+    {{errorMessage}}
+  </div>     
+  <div *ngIf="video">
+    <div>
+      <div id="convert-result" role="alert" class="row  col-12 mx-auto mt-5 alert alert-primary shadow-lg">
+        <div class="container col-6">
+          <p class="convert-title">Download video as:</p>
+        </div> 
+        <div class="container">
+          <div class="row mx-auto">
+            <div class=" mt-3  result-col-thumb">
+              <iframe class="d-flex" [src]="url | safe">
+              </iframe>
+            </div> 
+            <div class="col ">
+              <div class="col-12 p-0 m-0">
+                <div class="tabs-header row">
+                  <a class="video-title col-12 m-0 active-tab">
+                    <span>
+                      <i class="fa fa-youtube"></i> 
+                      Video 
+                    </span>
+                  </a>
+                </div>
+              </div> 
+              <div class="row m-0">
+                <div class="d-lg-block p-0 col-12">
+                  <div id="myTabContent" class="tab-content">
+                    <div id="nav-mp4" class="tab-pane active show">
+                      <table cellspacing="0" class="table table-dark table-striped table-sm mb-0">
+                        <tr *ngFor="let format of info | slice:0:calculateLength()">
+                          <td scope="row" >
+                            <span>
+                              <strong>{{format.mimeType.split(";")[0]}}</strong>
+                              {{format.hasVideo ? format.height + "p" : ""}}
+                            </span> 
+                            <span class="no-audio-icon" *ngIf="!format.hasAudio">
+                              <i class="fa fa-volume-off text-danger"></i>
+                            </span>
+                          </td> 
+                          <td class="align-middle text-center">
+                            <a id="download-webm-1080-no-audio" class="btn" [href]="format.url" target="_blank">
+                              <i class="fa fa-download"></i>
+                                Download
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                      <div class="show-more-button" (click)="showMoreActivate()">
+                        <span *ngIf="!showMore; else showLess" >Show more</span>
+                        <ng-template #showLess>
+                          <span>Show Less</span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="alert alert-primary" role="alert" *ngIf="error">
-      {{errorMessage}}
-    </div>
-    <button class="btn btn-primary">Download</button>
-  </form>
-  
-  <ng-template #showVideo>      
-    <div class="container">
-			<iframe class="d-flex" width="640" height="480" [src]="url | safe">
-			</iframe>
-		</div>
-		<div class="container">
-			<div class="btn-group">
-				<button
-					type="button"
-					class="btn btn-success dropdown-toggle mr-1"
-					data-toggle="dropdown"
-					aria-haspopup="true"
-					aria-expanded="false"
-          id="dropdownMenuButton"
-				>
-					Download
-				</button>
-        <button class="btn btn-secondary" (click)="reset()">Search for more videos</button>
-        <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item"  *ngFor="let format of info" [href]="format.url" target="_blank">
-              {{format.mimeType.split(";")[0]}}
-              {{format.hasVideo ? format.height + "p" : ""}}
-              <i class="fas fa-volume-mute text-danger" *ngIf="!format.hasAudio"></i>
-            </a>
-				</div>
-      </div>
-    </div>
-  </ng-template>
-</div>
+  </div>
+</section>

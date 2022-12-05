@@ -31,12 +31,17 @@ export class AppComponent {
 
   errorMessage: string = "";
 
+  showMore: boolean = false;
+
+  infoLength: number = this.info.length;
+
   constructor(private http: HttpClient) {}
     
     download(): void {
         this.error = false;
         this.errorMessage = "";
         this.loading = true;
+        this.video = false;
         this.http.get<vidDetails>('http://localhost:5000/download', {params: this.input}).subscribe((data) => {
         this.video = true;
         this.url = data.url;
@@ -50,10 +55,12 @@ export class AppComponent {
     )
     }
     
-    reset(): void {
-      this.video = false;
-      this.url = '';
-      this.info = [{}];
-      this.input.url = "";
+    showMoreActivate(): void {
+      this.showMore = !this.showMore;
+      console.log(this.showMore)
+    }
+
+    calculateLength(): number {
+     return this.infoLength = this.showMore ? this.info.length : 9;
     }
 }
